@@ -1,2 +1,2 @@
 # PredictingPRNGs
-Predicting Pseudo Random Number Generators using machine learnign techniques
+Predicting Pseudo Random Number Generators using machine learning techniques
