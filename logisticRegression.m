@@ -1,4 +1,5 @@
 function [model] = logisticRegression(X,y)
+%TODO: convert this to multiclass logistic regression
 
 % Add bias variable
 [n,d] = size(X);

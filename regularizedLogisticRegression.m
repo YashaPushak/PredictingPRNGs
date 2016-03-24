@@ -1,4 +1,5 @@
 function [model] = regularizedLogisticRegression(X,y,lambda)
+%TODO: Convert this to multiclass logistic regression
 
 % Add bias variable
 [n,d] = size(X);
