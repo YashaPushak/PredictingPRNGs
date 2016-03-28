@@ -7,9 +7,11 @@ function [X,y,Xtest,Ytest] = alternatingPRNG(n,d,t,k,noise)
 rng('shuffle');
 
 numsTrain = ones(1,n+d);
+%alternating numbers 1 and 2
 for i = 1:2:(n+d)
 	numsTrain(i) = 2;
 end
+%adding noise
 for i = 1:(n+d)
     if(rand < noise)
         numsTrain(i) = randi(k);
