@@ -9,15 +9,15 @@ function [X,y,Xtest,Ytest] = matlabTwisterPRNG(n,d,t,k, featureType)
 %the PRNG
 % rng(0,'twister');
 % rng('twister');
-numsTrain = randi(k,1,n+d);
-numsTest = randi(k,1,t+d);
-if ( featureType == 's')
-    
-    [X,y] = reformat(numsTrain,n,d,k);
-    [Xtest,Ytest] = reformat(numsTest,t,d,k);
-else
-if ( featureType == 'c')
-    [X,y] = reformatCounting(numsTrain,n,d,k);
-    [Xtest,Ytest] = reformatCounting(numsTest,t,d,k); 
+
+%set up default 
+if nargin < 5,
+    featureType = 's';
 end
+
+numsTrain = randi(k,1,n+d);
+[X,y] = reformat(numsTrain,n,d,k, featureType);
+numsTest = randi(k,1,t+d);
+[Xtest,Ytest] = reformat(numsTest,t,d,k, featureType);
+
 end

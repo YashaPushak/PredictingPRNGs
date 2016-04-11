@@ -7,7 +7,8 @@ for i = 1:1000
     t = 1000;
     k = 5;
     
-    [X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1);
+   % [X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1);
+   [X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,'s');
     
     model = KNN(X,y,101);
     yhat = model.predict(model,Xtest);
