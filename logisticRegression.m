@@ -4,9 +4,10 @@ function [model] = logisticRegression(X,y)
 % Add bias variable
 [n,d] = size(X);
 X = [ones(n,1) X];
+[~,k] = size(y);
 
 % Initial values of regression parameters
-w = zeros(d+1,1);
+w = zeros(d+1,k);
 
 % % Check that derivative code is correct
 % derivativeCheck(@logisticGrad,w,X,y);
