@@ -1,15 +1,15 @@
 clear
 
 n = 1000;
-d = 50;
-t = 500;
-k = 3;
+d = 9;
+t = 7000;
+k = 2;
 
-[X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k);
+[X,y,Xtest,ytest] = yashaPRNG(n,d,t,k);
 
-model = logisticRegression(X,y);
+model = regularizedLogisticRegression(X,y,2);
 yhat = model.predict(model,Xtest);
-err = sum(sum(yhat ~= ytest))/(t*k);
+err = 1-sum(all(yhat' == ytest'))/t;
 
 fprintf('Error for Logistic Regression: %.10f \n', err);
 

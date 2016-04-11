@@ -1,4 +1,4 @@
-function [X,y,Xtest,Ytest] = yashaPRNG(n,d,t,k,featureType)
+function [X,y,Xtest,Ytest] = randomDotOrgPRNG(n,d,t,k,featureType)
 %n - number of inputs
 %d - Number of preceeding values used for predictions
 %t - Number of test values
@@ -10,8 +10,8 @@ if nargin < 5,
 end
 
 if(k == 2)
-    text = fileread('yasha-k=2.txt');
-    nums = str2num(text(:)); %#ok<ST2NM>
+    text = fileread('random.org-k=2.txt');
+    nums = str2num(text); %#ok<ST2NM>
     
     %If we have more numbers than we need, then we truncate the numbers
     if(length(nums) >= n + t + 2*d)
