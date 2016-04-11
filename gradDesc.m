@@ -4,6 +4,8 @@ function [w,f] = gradDesc(funObj,w,maxEvals,varargin)
 % Step size
 alpha = 1e-2;
 
+[~,k] = size(w);
+
 % Evaluate initial function and gradient
 [f,g] = funObj(w,varargin{:});
 funEvals = 1;
@@ -16,8 +18,10 @@ while funEvals < maxEvals
         w = w - alpha*g;
     else
         %BB step
-        alpha = (s'*y)/(y'*y);
-        w = w - alpha*g;
+        for i = 1:k
+            alpha = (s(:,i)'*y(:,i))/(y(:,i)'*y(:,i));
+            w(:,i) = w(:,i) - alpha*g(:,i);
+        end
     end
     
     gold = g;

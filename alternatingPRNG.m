@@ -4,7 +4,8 @@ function [X,y,Xtest,Ytest] = alternatingPRNG(n,d,t,k,noise)
 %t - Number of test values
 %k - Number of classes
 
-rng('shuffle');
+%rng('shuffle');
+rng(0,'twister');
 
 numsTrain = ones(1,n+d);
 for i = 1:2:(n+d)
