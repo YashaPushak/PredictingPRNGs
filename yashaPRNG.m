@@ -1,4 +1,4 @@
-function [X,y,Xtest,Ytest] = yashaPRNG(n,d,t,k,featureType)
+function [X,y,Xtest,Ytest] = yashaPRNG(n,d,t,k,featureType, labelSize)
 %n - number of inputs
 %d - Number of preceeding values used for predictions
 %t - Number of test values
@@ -7,6 +7,7 @@ function [X,y,Xtest,Ytest] = yashaPRNG(n,d,t,k,featureType)
 %set up default
 if nargin < 5,
     featureType = 's';
+    labelSize = k;
 end
 
 if(k == 2)
@@ -36,7 +37,7 @@ if(k == 2)
     end
 end
 
-[X,y] = reformat(numsTrain,n,d,k, featureType);
-[Xtest,Ytest] = reformat(numsTest,t,d,k, featureType);
+[X,y] = reformat(numsTrain,n,d,k, featureType, labelSize);
+[Xtest,Ytest] = reformat(numsTest,t,d,k, featureType, labelSize);
 
 end

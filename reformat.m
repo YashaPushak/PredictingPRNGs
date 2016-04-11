@@ -15,9 +15,12 @@ function [X,y] = reformat(nums,n,d,k, featureType, labelSize)
 
 
 %set default to sequence features and k labels
-if (nargin < 5)
-    featureType = 's';
-    labelSize = k;
+if (nargin < 6)
+    labelSize =k;
+    
+    if(nargin <5)
+        featureType = 's';
+    end
 end
 
 X = zeros(n,d);
