@@ -5,13 +5,13 @@ for i = 1:1000
     n = 1000;
     d = 500;
     t = 1000;
-    k = 3;
+    k = 5;
     
-    [X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k);
+    [X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1);
     
     model = KNN(X,y,101);
     yhat = model.predict(model,Xtest);
-    err(i) = sum(sum(yhat ~= ytest))/(t*k);
+    err(i) = 1-sum(all(yhat' == ytest'))/t;
     
     disp(['iteration: ' num2str(i) ]);
     fprintf('Average Error for KNN: %.04f \n', mean(err));
