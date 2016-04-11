@@ -1,4 +1,4 @@
-function [X,y,Xtest,Ytest] = rotatingPRNG(n,d,t,k,noise, featureType)
+function [X,y,Xtest,Ytest] = rotatingPRNG(n,d,t,k,noise, featureType, labelSize)
 %n - number of inputs
 %d - Number of preceeding values used for predictions
 %t - Number of test values
@@ -14,6 +14,7 @@ function [X,y,Xtest,Ytest] = rotatingPRNG(n,d,t,k,noise, featureType)
 
 if nargin < 6,
     featureType = 's';
+    labelSize = k;
 end
 rng('shuffle');
 % rng(0,'twister');
@@ -29,7 +30,7 @@ for i = 1:(n+d)
         numsTrain(i) = randi(k);
     end
 end
-[X,y] = reformat(numsTrain,n,d,k, featureType);
+[X,y] = reformat(numsTrain,n,d,k, featureType, labelSize);
 numsTest = ones(1,t+d);
 for j = 1:k
     for i = j:k:(t+d)
@@ -41,5 +42,5 @@ for i = 1:(t+d)
         numsTest(i) = randi(k);
     end
 end
-[Xtest,Ytest] = reformat(numsTest,t,d,k, featureType);
+[Xtest,Ytest] = reformat(numsTest,t,d,k, featureType, labelSize);
 end

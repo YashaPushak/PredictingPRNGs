@@ -16,8 +16,8 @@ function [X,y] = reformat(nums,n,d,k, featureType, labelSize)
 
 %set default to sequence features and k labels
 if (nargin < 5)
-    featureType = 's'
-    labelSize = k
+    featureType = 's';
+    labelSize = k;
 end
 
 X = zeros(n,d);
@@ -44,7 +44,7 @@ for i = 1:n
     %Format labels depending on labelSize
     
     if( labelSize == 1)
-        y(i) = nums(i+d)
+        y(i) = nums(i+d);
     else
         if (labelSize == k)
             for j = 1:k
@@ -54,7 +54,11 @@ for i = 1:n
                     y(i,j) = -1;
                 end
             end
+            
+        else
+            fprintf('Unknown input for Feature type')
         end
+        
     end
 end
 

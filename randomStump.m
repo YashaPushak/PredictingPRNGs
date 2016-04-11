@@ -36,9 +36,15 @@ if any(y ~= y(1))
             
             % Count number of class labels where the feature is greater than threshold
             count1 = zeros(C,1);
-            for n = find(X(:,d) > t)'
-                count1(y(n)) = count1(y(n)) + 1;
+            count1b = zeros(C,1);
+%             for n = find(X(:,d) > t)'
+%                 count1b(y(n)) = count1b(y(n)) + 1;
+%             end
+            for c = 1:C
+                
+               count1(c)= sum(X(y==c,d) > t) ;
             end
+            
             count0 = count-count1;
                         
             % Compute infogain
