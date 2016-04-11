@@ -10,8 +10,8 @@ function [X,y,Xtest,Ytest] = matlabTwisterPRNG(n,d,t,k)
 % rng(0,'twister');
 % rng('twister');
 
-numsTrain = randi(2,1,n+d);
+numsTrain = randi(k,1,n+d);
 [X,y] = reformat(numsTrain,n,d,k);
-numsTest = randi(2,1,t+d);
+numsTest = randi(k,1,t+d);
 [Xtest,Ytest] = reformat(numsTest,t,d,k);
 end
