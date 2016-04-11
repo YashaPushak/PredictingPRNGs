@@ -19,9 +19,14 @@ dist = pdist2(Xtest, model.Xtrain);
 for i=1:nTest,
     [~, perm] = sort(dist(i, :));
     s_perm = perm(1:model.K);
-    s_label(:) = model.Ytrain(s_perm,:);
+    s_label = model.Ytrain(s_perm,:);
+    [~,class] = max(sum(s_label == 1));
     for j = 1:model.classesk
-        yhat(i,j)=mode(s_label(:,j));
+        if(j == class)
+            yhat(i,j) = 1;
+        else
+            yhat(i,j) = -1;
+        end
     end
 end
 end
