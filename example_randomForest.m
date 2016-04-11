@@ -10,8 +10,14 @@ for i = 1:1000
     [X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1);
    %[X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,'s');
     
-    model = KNN(X,y,101);
+
+
+% Compute validation error with bootstrapped decision tree
+    depth = 4;
+    nTrees = 100;
+    model = randomForest(X,y,depth,nTrees);
     yhat = model.predict(model,Xtest);
+    
     err(i) = 1-sum(all(yhat' == ytest'))/t;
     
     disp(['iteration: ' num2str(i) ]);
@@ -22,12 +28,9 @@ for i = 1:1000
         cdfplot(err);
         pause(0.1);
     end
+    
 end
-
 
 fprintf('Average Error for KNN: %.04f \n', mean(err));
 fprintf('Median Error for KNN: %.04f \n', median(err));
 cdfplot(err);
-
-
-
