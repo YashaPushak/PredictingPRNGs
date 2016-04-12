@@ -1,20 +1,20 @@
 clear
 
-for i = 1
+for i = 1:5
     
-    n = 1000;
+    n = 5000;
     d = 9;
-    t = 8000;
-    k = 2;
+    t = 5000;
+    k = 3;
     featureType = 's';
     labelSize = 1;
    %[X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1,featureType,labelSize);
    %[X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,featureType,labelSize);
-   [X,y, Xtest, ytest] = yashaPRNG(n,d,t,2, featureType, labelSize);
+   [X,y, Xtest, ytest] = lcgPRNG(n,d,t,k, featureType, labelSize);
 
 
 % Compute validation error with bootstrapped decision tree
-    depth = 4;
+    depth = 10;
     nTrees = 100;
     model = randomForest(X,y,depth,nTrees);
     yhat = model.predict(model,Xtest);

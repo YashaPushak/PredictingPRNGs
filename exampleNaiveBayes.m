@@ -10,15 +10,15 @@ for i = 1
 
     % [X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1);
     % [X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,'s');
-    [X,y,Xtest,ytest] = kimPRNG(n,d,t,k,'s');
+    [X,y,Xtest,ytest] = kimPRNG(n,d,t,k,'s',1);
     
-    model = KNN(X,y,101);
+    model = naiveBayes(X,y);
     yhat = model.predict(model,Xtest);
-    err(i) = 1-sum(all(yhat' == ytest'))/t;
+    err(i) = sum(yhat ~= ytest)/t;
     
     disp(['iteration: ' num2str(i) ]);
-    fprintf('Average Error for KNN: %.04f \n', mean(err));
-    fprintf('Median Error for KNN: %.04f \n', median(err));
+    fprintf('Average Error for Naive Bayes: %.04f \n', mean(err));
+    fprintf('Median Error for Naive Bayes: %.04f \n', median(err));
     
     if(mod(i,100) == 0)
         cdfplot(err);
@@ -27,8 +27,8 @@ for i = 1
 end
 
 
-fprintf('Average Error for KNN: %.04f \n', mean(err));
-fprintf('Median Error for KNN: %.04f \n', median(err));
+fprintf('Average Error for Naive Bayes: %.04f \n', mean(err));
+fprintf('Median Error for Naive Bayes: %.04f \n', median(err));
 cdfplot(err);
 
 
