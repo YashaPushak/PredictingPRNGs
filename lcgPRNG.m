@@ -14,9 +14,9 @@ elseif nargin < 6
 end
 
 %Parameters of the linear congruiential generator
-a = 1103515245;
-c = 12345;
-m = 2^31;
+a = 22695477;
+c = 1;
+m = 2^32;
 
 %Set a random seed
 rng('shuffle');
