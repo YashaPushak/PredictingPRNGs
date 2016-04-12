@@ -36,7 +36,7 @@ elseif(length(nums) < n + t + 2*d)
     n = n - d;
     t = t - d;
     if(n > d)
-        warning(['Not enough numbers, truncating to n: ' num2str(n) + ', t: ' num2str(t) '.']);
+        warning(['Not enough numbers, truncating to n: ' num2str(n) ', t: ' num2str(t) '.']);
     else
         error('Not enough numbers, unable to truncate because n <= d.');
     end

@@ -2,15 +2,15 @@ clear
 
 for i = 1
     
-    n = 10000;
-    d = 11;
-    t = 10000;
+    n = 1000;
+    d = 21;
+    t = 8000;
     k = 5;
     
 
     % [X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1);
     % [X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,'s');
-    [X,y,Xtest,ytest] = lcgPRNG(n,d,t,k,'s');
+    [X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'c');
     
     model = KNN(X,y,101);
     yhat = model.predict(model,Xtest);

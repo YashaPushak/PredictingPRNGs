@@ -3,11 +3,11 @@ clear
 for i = 1:100
     
     n = 1000;
-    d = 11;
+    d = 20;
     t = 1000;
     k = 2;
     
-    [X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'s');
+    [X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'c');
     
     model = randomSampling(X,y);
     yhat = model.predict(model,Xtest);

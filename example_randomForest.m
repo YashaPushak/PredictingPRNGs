@@ -1,11 +1,11 @@
 clear
 
-for i = 1:1000
+for i = 1
     
     n = 1000;
     d = 9;
-    t = 7000;
-    k = 5;
+    t = 8000;
+    k = 2;
     featureType = 's';
     labelSize = 1;
    %[X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1,featureType,labelSize);
