@@ -7,7 +7,7 @@ for i = 1:100
     t = 1000;
     k = 2;
     
-    [X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'c');
+    [X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'s');
     
     model = randomSampling(X,y);
     yhat = model.predict(model,Xtest);
