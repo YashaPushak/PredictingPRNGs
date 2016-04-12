@@ -3,14 +3,15 @@ clear
 for i = 1
     
     n = 1000;
-    d = 21;
+    d = 9;
     t = 8000;
     k = 5;
     
 
     % [X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1);
     % [X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,'s');
-    [X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'c');
+    %[X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'c');
+    [X,y,Xtest,ytest] = kimPRNG(n,d,t,2,'c');
     
     model = KNN(X,y,101);
     yhat = model.predict(model,Xtest);
