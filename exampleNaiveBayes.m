@@ -2,26 +2,18 @@ clear
 
 for i = 1
     
-    n = 4000;
-    d = 9;
-    t = 4000;
-    k = 3;
+     n = 1000;
+    v = 1000;
+    t = 1000;
+    d = 12;
+    k = 5;
     featureType = 's';
     labelSize = 1;
+    seed= 0;
+    PRNGtype = 'yasha';
     
-    minErr =1;
-    minD = 0;
-    
-
-    % [X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1);
-    % [X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,'s');
-    %[X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,featureType, labelSize);
-    [X,y,Xtest,ytest] = kimPRNG(n,d,t,k,featureType, labelSize);
-    %[X,y,Xtest,ytest] = randomDotOrgPRNG(n,d,t,2,featureType, labelSize);
-    %[X,y,Xtest,ytest] = lcgPRNG(n,d,t,5,featureType, labelSize);
-    %[X,y,Xtest,ytest] = joelPRNG(n,d,t,2,featureType, labelSize);
-    
-    
+    [X,y,Xval, Yval, Xtest,ytest] = PRNGs(PRNGtype, n, v, t, d, k, featureType, labelSize, seed);
+  
     
     
     

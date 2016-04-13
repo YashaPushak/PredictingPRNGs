@@ -21,9 +21,7 @@ numsT = zeros(n,1);
 nums(1) = randi(2^31-1);
 numsT(1) = mod(nums(1),k)+1;
 
-
-nums = zeros(n+d,1);
-for i = 2:(n+d)
+for i = 2:n
     nums(i) = mod(a*nums(i-1) + c,m);
     numsT(i) = mod(nums(i),k)+1;
 end

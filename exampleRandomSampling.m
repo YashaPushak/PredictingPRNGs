@@ -3,12 +3,17 @@ clear
 for i = 1:100
     
     n = 1000;
-    d = 20;
+    v = 1000;
     t = 1000;
-    k = 2;
+    d = 12;
+    k = 5;
+    featureType = 's';
+    labelSize = 1;
+    seed= 0;
+    PRNGtype = 'yasha';
     
-    [X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'s');
-    
+    [X,y,Xval, Yval, Xtest,ytest] = PRNGs(PRNGtype, n, v, t, d, k, featureType, labelSize, seed);
+
     model = randomSampling(X,y);
     yhat = model.predict(model,Xtest);
     err(i) = 1-sum(all(yhat' == ytest'))/t;

@@ -2,16 +2,17 @@ clear
 
 for i = 1
     
-    n = 1000;
-    d = 9;
-    t = 8000;
-    k = 2;
+     n = 1000;
+    v = 1000;
+    t = 1000;
+    d = 12;
+    k = 5;
     featureType = 's';
     labelSize = 1;
-   %[X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1,featureType,labelSize);
-   %[X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,featureType,labelSize);
-   [X,y, Xtest, ytest] = yashaPRNG(n,d,t,2, featureType, labelSize);
-
+    seed= 0;
+    PRNGtype = 'yasha';
+    
+    [X,y,Xval, Yval, Xtest,ytest] = PRNGs(PRNGtype, n, v, t, d, k, featureType, labelSize, seed);
 
 % Compute validation error with bootstrapped decision tree
     depth = 4;
