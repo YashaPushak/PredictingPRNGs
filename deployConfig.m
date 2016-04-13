@@ -1,11 +1,11 @@
 %Configures each of the learners/classifiers
 
 %Number of training inputs
-n = 500;
+n = 100;
 %Number of validation inputs
-v = 500;
+v = 100;
 %Number of test inputs
-t = 500;
+t = 100;
 
 %Fix the seed used to generate the random data, if applicable, so that we
 %are always retrieving the same data
@@ -29,7 +29,7 @@ for PRNG = 1:4
         getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) PRNGs('random.org',n,v,t,d,k,featureType,labelSize,seed);
     end
     
-    fprintf(fid,'#Algorithm name, configuration time, [param name], [param value], ...');
+    fprintf(fid,'#Algorithm name, configuration time, [param name], [param value], ...\n');
     
     %We are fixing k and d, as preliminary results indicated no strong
     %correlation between parameter settings, k and d. We note that
@@ -40,38 +40,40 @@ for PRNG = 1:4
     tic;
     learner(1) = configureRandomSampling(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['Random Sampling, ' num2str(timeTrain) ', featureType, ' learner(1).featureType ', labelSize, ' num2str(learner(1).labelSize)]);
+    fprintf(fid,['Random Sampling, ' num2str(timeTrain) ', featureType, ' learner(1).featureType ', labelSize, ' num2str(learner(1).labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     tic;
     learner(2) = configureRandomForests(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['Random Forests, ' num2str(timeTrain) ', depth, ' num2str(learner(2).depth) ', nTrees, ' num2str(learner(2).nTrees) ', featureType, ' learner(1).featureType ', labelSize, ' num2str(learner(1).labelSize)]);
+    fprintf(fid,['Random Forests, ' num2str(timeTrain) ', depth, ' num2str(learner(2).depth) ', nTrees, ' num2str(learner(2).nTrees) ', featureType, ' learner(1).featureType ', labelSize, ' num2str(learner(1).labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     tic;
     learner(3) = configureKNN(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['KNN, ' num2str(timeTrain) ', neighbours, ' num2str(learner(3).neighbours) ', featureType, ' learner(3).featureType ', labelSize, ' num2str(learner(3).labelSize)]);
+    fprintf(fid,['KNN, ' num2str(timeTrain) ', neighbours, ' num2str(learner(3).neighbours) ', featureType, ' learner(3).featureType ', labelSize, ' num2str(learner(3).labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     tic;
     learner(4) = configureNaiveBayes(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['Naive Bayes, ' num2str(timeTrain) ', featureType, ' learner(4).featureType ', labelSize, ' num2str(learner(4).labelSize)]);    
+    fprintf(fid,['Naive Bayes, ' num2str(timeTrain) ', featureType, ' learner(4).featureType ', labelSize, ' num2str(learner(4).labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     
     learner(5) = configureLogisticRegression(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['Logistic Regression, ' num2str(timeTrain) ', lambda, ' num2str(learner(5).lambda) ', featureType, ' learner(5).featureType ', labelSize, ' num2str(learner(5).labelSize)]);    
+    fprintf(fid,['Logistic Regression, ' num2str(timeTrain) ', lambda, ' num2str(learner(5).lambda) ', featureType, ' learner(5).featureType ', labelSize, ' num2str(learner(5).labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     fclose(fid);
     
+    fid = fopen(['TestData_PRNG=' num2str(PRNG) '.txt'],'w');
+    fprintf(fid, ['Test Data for PRNG = ' num2str(PRNG) '\n']);
+    fprintf(fid,'#Algorithm name, k, d, training time, testing time, error\n');
     for k = [2,3,5]
         for d = [1,2,4,8,16,32,64,128,256]
-            fopen(['DATA_k=' num2str(k) '_d=' num2str(d) '.txt']);
             for i = 1:5
                 [X,y,~,~,Xtest,ytest] = getPRNG(n,v,t,d,k,learner(i).featureType,learner(i).labelSize,seed);
                 
@@ -91,10 +93,13 @@ for PRNG = 1:4
                     err = 1-sum(all(yhat' == ytest'))/t;
                 end
                 
+                fprintf(fid, [learner(i).name ', ' k ', ' d ', ' trainTime ', ' testTime ', ' err '\n']);
                 
             end
         end
     end
+    
+    fclose(fid);
     
 end
 
