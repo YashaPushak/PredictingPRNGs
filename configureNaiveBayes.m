@@ -16,6 +16,7 @@ function [learner] = configureNaiveBayes(getPRNG,n,v,t,d,k,seed)
 %Naive Bayes always uses a label size of 1.
 labelSize = 1;
 
+bestErr = inf;
 
 for featureType = ['s','c']
     %Save and restore the random number sequence
