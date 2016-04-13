@@ -8,7 +8,7 @@ for i = 1:100
     d = 12;
     k = 5;
     featureType = 's';
-    labelSize = 1;
+    labelSize = k;
     seed= 0;
     PRNGtype = 'yasha';
     
