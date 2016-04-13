@@ -12,14 +12,13 @@ m = 2^32;
 
 %Set a random seed
 if nargin < 3
-    seed = 'shuffle'
+    seed = 'shuffle';
 end 
 
 rng(seed);
 
 nums = zeros(n,1);
 numsT = zeros(n,1);
-
 
 nums(1) = randi(2^31-1);
 numsT(1) = mod(nums(1),k)+1;

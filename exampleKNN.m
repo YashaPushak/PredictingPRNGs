@@ -12,6 +12,7 @@ for i = 1
     % [X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,'s');
     %[X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'c');
     [X,y,Xtest,ytest] = lcgPRNG(n,d,t,k,'s');
+
     
     model = KNN(X,y,101);
     yhat = model.predict(model,Xtest);
