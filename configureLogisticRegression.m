@@ -46,6 +46,7 @@ for featureType = ['s','c']
             bestErr = err;
             learner.train = @(X,y) regularizedLogistic(X,y,lambda);
             learner.featureType = featureType;
+            learner.lambda = lambda;
             save configureKNN;
         end
     end

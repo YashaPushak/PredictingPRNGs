@@ -43,6 +43,8 @@ for featureType = ['s','c']
                bestErr = err;
                learner.train = @(X,y) randomForest(X,y,depth,nTrees);
                learner.featureType = featureType;
+               learner.depth = depth;
+               learner.nTrees = nTrees;
                save configureRandomForests;
             end
         end

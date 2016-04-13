@@ -28,14 +28,23 @@ for PRNG = 1:4
     k = 3;
     d = 5;
     
-    randomSampling = configureRandomSampling(getPRNG,n,v,t,d,k,seed);
-    save configurations;
-    randomForests = configureRandomForests(getPRNG,n,v,t,d,k,seed);
-    save configurations;
-    KNN = configureKNN(getPRNG,n,v,t,d,k,seed);
-    save configurations;
+%     randomSampling = configureRandomSampling(getPRNG,n,v,t,d,k,seed);
+    save(['configurations' num2str(PRNG)]);
+%     randomForests = configureRandomForests(getPRNG,n,v,t,d,k,seed);
+    save(['configurations' num2str(PRNG)]);
+%     KNN = configureKNN(getPRNG,n,v,t,d,k,seed);
+    save(['configurations' num2str(PRNG)]);
     naiveBayes = configureNaiveBayes(getPRNG,n,v,t,d,k,seed);
-    save configurations;
+    save(['configurations' num2str(PRNG)]);
     logisticRegression = configureLogisticRegression(getPRNG,n,v,t,d,k,seed);
-    save configurations;
+    save(['configurations' num2str(PRNG)]);
+    
+%     for k = [2,3,5]
+%         for d = [1,2,4,8,16,32,64,128,256]
+%             [X,y,Xval,yval,Xtest,ytest] = getPRNG(n,v,t,d,k,featureType,labelSize,seed);
+% %             randomSampling.train(
+%         end
+%     end
+    
 end
+
