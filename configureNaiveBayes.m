@@ -52,6 +52,7 @@ for featureType = ['s','c']
         learner.train = @(X,y) naiveBayes(X,y);
         learner.featureType = featureType;
         learner.labelSize = labelSize;
+        learner.name = 'Naive Bayes';
         save configureNaiveBayes;
     end
 end

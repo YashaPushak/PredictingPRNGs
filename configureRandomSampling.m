@@ -5,5 +5,6 @@ function [learner] = configureRandomSampling(~,~,~,~,~,k,~)
 learner.train = @(X,y) randomSampling(X,y);
 learner.featureType = 's';
 learner.labelSize = k;
+learner.name = 'Random Sampling';
 
 end

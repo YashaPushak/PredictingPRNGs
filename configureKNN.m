@@ -43,7 +43,8 @@ for featureType = ['s','c']
             learner.train = @(X,y) KNN(X,y,neighbours);
             learner.featureType = featureType;
             learner.neighbours = neighbours;
-            learn.labelSize = labelSize;
+            learner.labelSize = labelSize;
+            learner.name = 'KNN';
             save configureKNN;
         end
     end

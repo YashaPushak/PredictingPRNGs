@@ -48,6 +48,7 @@ for featureType = ['s','c']
             learner.featureType = featureType;
             learner.lambda = lambda;
             learner.labelSize = labelSize;
+            learner.name = 'Logistic Regression';
             save configureLogisticRegression;
         end
     end
