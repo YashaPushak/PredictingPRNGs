@@ -44,7 +44,7 @@ for featureType = ['s','c']
         %save it to be returned later
         if(err < bestErr)
             bestErr = err;
-            learner.train = @(X,y) regularizedLogistic(X,y,lambda);
+            learner.train = @(X,y) regularizedLogisticRegression(X,y,lambda);
             learner.featureType = featureType;
             learner.lambda = lambda;
             learner.labelSize = labelSize;

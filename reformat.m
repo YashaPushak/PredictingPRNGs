@@ -39,7 +39,7 @@ for i = 1:n
                 X(i,j) = sum(seqI == j );
             end
         else
-            fprintf('Unknown input for Feature type')
+            error('Unknown input for Feature type')
         end
     end
     
@@ -59,7 +59,7 @@ for i = 1:n
             end
             
         else
-            fprintf('Unknown input for Feature type')
+            error('Unknown label size')
         end
         
     end

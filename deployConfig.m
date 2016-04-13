@@ -1,18 +1,19 @@
 %Configures each of the learners/classifiers
 
 %Number of training inputs
-n = 100;
+n = 150;
 %Number of validation inputs
-v = 100;
+v = 150;
 %Number of test inputs
-t = 100;
+t = 150;
 
 %Fix the seed used to generate the random data, if applicable, so that we
 %are always retrieving the same data
 seed = 12345;
 
 for PRNG = 1:4
-    fid = fopen(['Configure_PRNG=' num2str(PRNG) '.txt'],'w');
+    fprintf(['Configuring and Testing PRNG =' num2str(PRNG)  '\n']);
+    fid = fopen(['Configure_PRNG=' num2str(PRNG) '.csv'],'w');
     
     
     if PRNG == 1
@@ -38,47 +39,51 @@ for PRNG = 1:4
     d = 5;
     
     tic;
-    learner(1) = configureRandomSampling(getPRNG,n,v,t,d,k,seed);
+    learner(1).config = configureRandomSampling(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['Random Sampling, ' num2str(timeTrain) ', featureType, ' learner(1).featureType ', labelSize, ' num2str(learner(1).labelSize) '\n']);
+    fprintf(fid,['Random Sampling, ' num2str(timeTrain) ', featureType, ' learner(1).config.featureType ', labelSize, ' num2str(learner(1).config.labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     tic;
-    learner(2) = configureRandomForests(getPRNG,n,v,t,d,k,seed);
+    learner(2).config = configureRandomForests(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['Random Forests, ' num2str(timeTrain) ', depth, ' num2str(learner(2).depth) ', nTrees, ' num2str(learner(2).nTrees) ', featureType, ' learner(1).featureType ', labelSize, ' num2str(learner(1).labelSize) '\n']);
+    fprintf(fid,['Random Forests, ' num2str(timeTrain) ', depth, ' num2str(learner(2).config.depth) ', nTrees, ' num2str(learner(2).config.nTrees) ', featureType, ' learner(2).config.featureType ', labelSize, ' num2str(learner(2).config.labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     tic;
-    learner(3) = configureKNN(getPRNG,n,v,t,d,k,seed);
+    learner(3).config = configureKNN(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['KNN, ' num2str(timeTrain) ', neighbours, ' num2str(learner(3).neighbours) ', featureType, ' learner(3).featureType ', labelSize, ' num2str(learner(3).labelSize) '\n']);
+    fprintf(fid,['KNN, ' num2str(timeTrain) ', neighbours, ' num2str(learner(3).config.neighbours) ', featureType, ' learner(3).config.featureType ', labelSize, ' num2str(learner(3).config.labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     tic;
-    learner(4) = configureNaiveBayes(getPRNG,n,v,t,d,k,seed);
+    learner(4).config = configureNaiveBayes(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['Naive Bayes, ' num2str(timeTrain) ', featureType, ' learner(4).featureType ', labelSize, ' num2str(learner(4).labelSize) '\n']);
+    fprintf(fid,['Naive Bayes, ' num2str(timeTrain) ', featureType, ' learner(4).config.featureType ', labelSize, ' num2str(learner(4).config.labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     
-    learner(5) = configureLogisticRegression(getPRNG,n,v,t,d,k,seed);
+    learner(5).config = configureLogisticRegression(getPRNG,n,v,t,d,k,seed);
     timeTrain = toc;
-    fprintf(fid,['Logistic Regression, ' num2str(timeTrain) ', lambda, ' num2str(learner(5).lambda) ', featureType, ' learner(5).featureType ', labelSize, ' num2str(learner(5).labelSize) '\n']);
+    fprintf(fid,['Logistic Regression, ' num2str(timeTrain) ', lambda, ' num2str(learner(5).config.lambda) ', featureType, ' learner(5).config.featureType ', labelSize, ' num2str(learner(5).config.labelSize) '\n']);
     save(['configurations' num2str(PRNG)]);
     
     fclose(fid);
     
-    fid = fopen(['TestData_PRNG=' num2str(PRNG) '.txt'],'w');
+    fid = fopen(['TestData_PRNG=' num2str(PRNG) '.csv'],'w');
     fprintf(fid, ['Test Data for PRNG = ' num2str(PRNG) '\n']);
     fprintf(fid,'#Algorithm name, k, d, training time, testing time, error\n');
     for k = [2,3,5]
         for d = [1,2,4,8,16,32,64,128,256]
             for i = 1:5
-                [X,y,~,~,Xtest,ytest] = getPRNG(n,v,t,d,k,learner(i).featureType,learner(i).labelSize,seed);
+                if( learner(i).config.labelSize ==1)
+                    labelSize =1;
+                else labelSize = k;
+                end
+                [X,y,~,~,Xtest,ytest] = getPRNG(n,v,t,d,k,learner(i).config.featureType,labelSize,seed);
                 
                 tic;
-                model = learner(i).train(X,y);
+                model = learner(i).config.train(X,y);
                 trainTime = toc;
                 
                 tic;
@@ -87,13 +92,13 @@ for PRNG = 1:4
                 
                 %Compute the test error, this depends on how the labels
                 %are formatted.
-                if(learner(i).labelSize == 1)
+                if(learner(i).config.labelSize == 1)
                     err = sum(yhat ~= ytest)/t;
                 else
                     err = 1-sum(all(yhat' == ytest'))/t;
                 end
                 
-                fprintf(fid, [learner(i).name ', ' k ', ' d ', ' trainTime ', ' testTime ', ' err '\n']);
+                fprintf(fid, [num2str(learner(i).config.name) ', ' num2str(k) ', ' num2str(d) ', ' num2str(trainTime) ', ' num2str(testTime) ', ' num2str(err) '\n']);
                 
             end
         end
