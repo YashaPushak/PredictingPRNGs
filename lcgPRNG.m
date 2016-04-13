@@ -21,7 +21,7 @@ m = 2^31;
 %Set a random seed
 rng('shuffle');
 
-nums = size(max(n+d,t+d),1);
+nums = zeros(max(n+d,t+d),1);
 numsTrain = zeros(n+d,1);
 numsTest = zeros(t+d,1);
 
