@@ -47,6 +47,7 @@ for featureType = ['s','c']
             learner.train = @(X,y) regularizedLogistic(X,y,lambda);
             learner.featureType = featureType;
             learner.lambda = lambda;
+            learner.labelSize = labelSize;
             save configureKNN;
         end
     end

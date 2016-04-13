@@ -45,6 +45,7 @@ for featureType = ['s','c']
                learner.featureType = featureType;
                learner.depth = depth;
                learner.nTrees = nTrees;
+               learner.labelSize = labelSize;
                save configureRandomForests;
             end
         end

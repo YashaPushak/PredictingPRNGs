@@ -9,7 +9,7 @@ t = 500;
 
 %Fix the seed used to generate the random data, if applicable, so that we
 %are always retrieving the same data
-seed = 0;
+seed = 12345;
 
 for PRNG = 1:4
     if PRNG == 1
@@ -39,12 +39,13 @@ for PRNG = 1:4
     logisticRegression = configureLogisticRegression(getPRNG,n,v,t,d,k,seed);
     save(['configurations' num2str(PRNG)]);
     
-%     for k = [2,3,5]
-%         for d = [1,2,4,8,16,32,64,128,256]
-%             [X,y,Xval,yval,Xtest,ytest] = getPRNG(n,v,t,d,k,featureType,labelSize,seed);
-% %             randomSampling.train(
-%         end
-%     end
+    for k = [2,3,5]
+        for d = [1,2,4,8,16,32,64,128,256]
+            [X,y,~,~,Xtest,ytest] = getPRNG(n,v,t,d,k,featureType,labelSize,seed);
+            model = randomSampling.train(X,y);
+            yhat = model.predict(model,Xtest)
+        end
+    end
     
 end
 
