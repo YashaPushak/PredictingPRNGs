@@ -56,17 +56,17 @@ if(length(nums) >= numsSize)
     
 elseif(length(nums) < numsSize)
     error('Not enough numbers to make train, val, and test set');
-%     n = round(length(nums)/2);
-%     numsTrain = nums(1:n);
-%     numsTest = nums(n+1:end);
-%     n = n - d;
-%     t = t - d;
-%     if(n > d)
-%         warning(['Not enough numbers, truncating to n: ' num2str(n) ', t: ' num2str(t) '.']);
-%     else
-%        error('Not enough numbers, unable to truncate because n <= d.');
-%    end
+    %     n = round(length(nums)/2);
+    %     numsTrain = nums(1:n);
+    %     numsTest = nums(n+1:end);
+    %     n = n - d;
+    %     t = t - d;
+    %     if(n > d)
+    %         warning(['Not enough numbers, truncating to n: ' num2str(n) ', t: ' num2str(t) '.']);
+    %     else
+    %        error('Not enough numbers, unable to truncate because n <= d.');
+    %    end
 end
-    
-    
+
+
 end

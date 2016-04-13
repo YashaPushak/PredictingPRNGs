@@ -2,10 +2,6 @@ function [nums] = loadPRNG(filePrefix,k)
 %Loads the PRNGS from a file using the file prefix specified of the form
 %"filename" such that "<filename>-k=<k>.txt" specifies the file containing
 %the PRNG information.
-%n - number of inputs
-%d - Number of preceeding values used for predictions
-%t - Number of test values
-%k - Number of classes NOTE: Can only take values 2, 3, or 5 for this PRNG
 
 
 if(k == 2)
