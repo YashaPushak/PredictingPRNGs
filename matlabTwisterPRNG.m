@@ -1,4 +1,4 @@
-function [X,y,Xtest,Ytest] = matlabTwisterPRNG(n,d,t,k, featureType, labelSize)
+function [nums] = matlabTwisterPRNG(n,k)
 %n - number of inputs
 %d - Number of preceeding values used for predictions
 %t - Number of test values
@@ -15,18 +15,14 @@ function [X,y,Xtest,Ytest] = matlabTwisterPRNG(n,d,t,k, featureType, labelSize)
 %Fix the seed - Note that the Mersenne Twister's performance depends on the
 %random number seed. A better quality seed may improve the performance of
 %the PRNG
+
 % rng(0,'twister');
-% rng('twister');
 
-%set up default 
-if nargin < 5,
-    featureType = 's';
-    labelSize =k;
-end
+rng('twister');
 
-numsTrain = randi(k,1,n+d);
-[X,y] = reformat(numsTrain,n,d,k, featureType, labelSize);
-numsTest = randi(k,1,t+d);
-[Xtest,Ytest] = reformat(numsTest,t,d,k, featureType, labelSize);
+
+
+nums= randi(k,1,n);
+
 
 end
