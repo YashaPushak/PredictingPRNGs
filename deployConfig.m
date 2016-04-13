@@ -70,6 +70,8 @@ for PRNG = 1:4
     
     fclose(fid);
     
+    fprintf('Done Configuration!\n');
+    
     fid = fopen(['TestData_PRNG=' num2str(PRNG) '.csv'],'w');
     fprintf(fid, ['Test Data for PRNG = ' num2str(PRNG) '\n']);
     fprintf(fid,'#Algorithm name, k, d, training time, testing time, error\n');
