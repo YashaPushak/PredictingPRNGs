@@ -12,7 +12,7 @@ m = 2^32;
 
 %Set a random seed
 if nargin < 3
-    seed = 'shuffle'
+    seed = 'shuffle';
 end 
 
 rng(seed);
