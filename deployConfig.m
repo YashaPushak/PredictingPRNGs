@@ -28,22 +28,24 @@ for PRNG = 1:4
     k = 3;
     d = 5;
     
-%     randomSampling = configureRandomSampling(getPRNG,n,v,t,d,k,seed);
+    learner(1) = configureRandomSampling(getPRNG,n,v,t,d,k,seed);
     save(['configurations' num2str(PRNG)]);
-%     randomForests = configureRandomForests(getPRNG,n,v,t,d,k,seed);
+    learner(2) = configureRandomForests(getPRNG,n,v,t,d,k,seed);
     save(['configurations' num2str(PRNG)]);
-%     KNN = configureKNN(getPRNG,n,v,t,d,k,seed);
+    learner(3) = configureKNN(getPRNG,n,v,t,d,k,seed);
     save(['configurations' num2str(PRNG)]);
-    naiveBayes = configureNaiveBayes(getPRNG,n,v,t,d,k,seed);
+    learner(4) = configureNaiveBayes(getPRNG,n,v,t,d,k,seed);
     save(['configurations' num2str(PRNG)]);
-    logisticRegression = configureLogisticRegression(getPRNG,n,v,t,d,k,seed);
+    learner(5) = configureLogisticRegression(getPRNG,n,v,t,d,k,seed);
     save(['configurations' num2str(PRNG)]);
     
     for k = [2,3,5]
         for d = [1,2,4,8,16,32,64,128,256]
-            [X,y,~,~,Xtest,ytest] = getPRNG(n,v,t,d,k,featureType,labelSize,seed);
-            model = randomSampling.train(X,y);
-            yhat = model.predict(model,Xtest)
+            for i = 1:5
+                [X,y,~,~,Xtest,ytest] = getPRNG(n,v,t,d,k,learner(i).featureType,learner(i).labelSize,seed);
+                model = learner(i).train(X,y);
+                yhat = model.predict(model,Xtest);
+            end
         end
     end
     

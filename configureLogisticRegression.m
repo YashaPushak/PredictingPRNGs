@@ -48,7 +48,7 @@ for featureType = ['s','c']
             learner.featureType = featureType;
             learner.lambda = lambda;
             learner.labelSize = labelSize;
-            save configureKNN;
+            save configureLogisticRegression;
         end
     end
 end
