@@ -20,7 +20,6 @@ rng(seed);
 nums = zeros(n,1);
 numsT = zeros(n,1);
 
-
 nums(1) = randi(2^31-1);
 numsT(1) = mod(nums(1),k)+1;
 

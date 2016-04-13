@@ -8,9 +8,17 @@ for PRNG = 1:4
     else
         getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) randomDotOrgPRNG(n,v,t,d,k,featureType,labelSize,seed);
     end
+    
+    %We are fixing k and d, as preliminary results indicated no strong
+    %correlation between parameter settings, k and d. We note that
+    %configuring 
     k = 3;
     d = 5;
-     
+    
+    %Fix the seed used to generate the random data, if applicable, so that we
+    %are always retrieving the same data
+    seed = 0;
+
     randomSampling = configureRandomSampling(getPRNG,k,d);
     save configurations;
     randomForests = configureRandomForests(getPRNG,k,d);
@@ -21,5 +29,4 @@ for PRNG = 1:4
     save configurations;
     logisticRegression = configureLogisticRegression(getPRNG,k,d);
     save configurations;
-
 end

@@ -1,17 +1,18 @@
-function [learner] = configureRandomForests(getPRNG,k,d,seed)
-%Configures the Random Forests function for a given PRNG, k,d, and seed, which
+function [learner] = configureKNN(getPRNG,k,d,seed)
+%Configures the KNN function for a given PRNG, k,d, and seed, which
 %uniquely define the training and validation databestErr = inf; 
-%Random Forests has thre configurable parameters, the format of the features we are
-%inputing to it, the depth of the trees, and the number of trees. We are
-%configuring using 2 values for feature type, 5 values for depth, and 5
+%KNN has two configurable parameters, the format of the features we are
+%inputing to it, and the number of neighbours considered. We are checking 2
+%values for the feature type, and 25 values for the number of neighbours,
+%this results in a total of 50 configurations being tested.
 %INPUT:
-%values for the number of trees, results in 50 configurations being tried.
 %getPRNG - The random number generator function, see below for usage
 %k - The number of labels outputed by the PRNG
 %d - the random number seed to be used by the PRNG
 
-%Random Forests always uses a label size of 1.
-labelSize = 1;
+
+%KNN always uses a label size of k.
+labelSize = k;
 
 bestErr = inf;
 for featureType = ['s','c']
@@ -19,11 +20,9 @@ for featureType = ['s','c']
     s = rng;
     [X,y,Xval,yval,~,~] = getPRNG(n,v,t,d,k,featureType,labelSize,seed);
     rng(s);
-    
-    for depth = [3,4,5,6,7]
-        for nTrees = [50,75,100,125,150]
+    for neighbours = [21,25,31,35,41,45,51,55,61,65,71,75,81,85,91,95,101,105,111,115,121]
             %Train on X test, validate on Xval
-            model = randomForest(X,y,depth,nTrees);
+            model = KNN(X,y,neighbours);
             yhat = model.predict(model,Xval);
             
             %Compute the validation error, this depends on how the labels
@@ -38,9 +37,9 @@ for featureType = ['s','c']
             %save it to be returned later
             if(err < bestErr)
                bestErr = err;
-               learner.train = @(X,y) randomForest(X,y,depth,nTrees);
+               learner.train = @(X,y) KNN(X,y,neighbours);
                learner.featureType = featureType;
-               save configureRandomForests;
+               save configureKNN;
             end
         end
     end
