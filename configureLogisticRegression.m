@@ -1,4 +1,4 @@
-function [learner] = configureLogisticRegression(getPRNG,k,d,seed)
+function [learner] = configureLogisticRegression(getPRNG,n,v,t,d,k,seed)
 %Configures the logisticRegression function for a given PRNG, k,d, and seed, which
 %uniquely define the training and validation databestErr = inf;
 %In this setting, logistic regression  has 2 parameters, the input
@@ -12,8 +12,11 @@ function [learner] = configureLogisticRegression(getPRNG,k,d,seed)
 %configuring this algorithm than the others.
 %INPUT:
 %getPRNG - The random number generator function, see below for usage
-%k - The number of labels outputed by the PRNG
+%n - number of training points
+%v - number of validation points
+%t - number of testing points
 %d - the random number seed to be used by the PRNG
+%k - The number of labels outputed by the PRNG
 
 %Logistic Regression always uses a label size of 1.
 labelSize = 1;

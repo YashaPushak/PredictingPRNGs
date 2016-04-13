@@ -1,12 +1,12 @@
 for PRNG = 1:4
     if PRNG == 1
-        getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) yashaPRNG(n,v,t,d,k,featureType,labelSize,seed);
+        getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) PRNGs('yasha',n,v,t,d,k,featureType,labelSize,seed);
     elseif PRNG == 2
-        getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) kimPRNG(n,v,t,d,k,featureType,labelSize,seed);
+        getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) PRNGs('kim',n,v,t,d,k,featureType,labelSize,seed);
     elseif PRNG == 3
-        getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) lcgPRNG(n,v,t,d,k,featureType,labelSize,seed);
+        getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) PRNGs('lcg',n,v,t,d,k,featureType,labelSize,seed);
     else
-        getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) randomDotOrgPRNG(n,v,t,d,k,featureType,labelSize,seed);
+        getPRNG = @(n,v,t,d,k,featureType,labelSize,seed) PRNGs('random.org',n,v,t,d,k,featureType,labelSize,seed);
     end
     
     %We are fixing k and d, as preliminary results indicated no strong
@@ -19,14 +19,14 @@ for PRNG = 1:4
     %are always retrieving the same data
     seed = 0;
 
-    randomSampling = configureRandomSampling(getPRNG,k,d);
+    randomSampling = configureRandomSampling(getPRNG,n,v,t,d,k);
     save configurations;
-    randomForests = configureRandomForests(getPRNG,k,d);
+    randomForests = configureRandomForests(getPRNG,n,v,t,d,k);
     save configurations;
-    KNN = configureKNN(getPRNG,k,d);
+    KNN = configureKNN(getPRNG,n,v,t,d,k);
     save configurations;
-    naiveBayes = configureNaiveBayes(getPRNG,k,d);
+    naiveBayes = configureNaiveBayes(getPRNG,n,v,t,d,k);
     save configurations;
-    logisticRegression = configureLogisticRegression(getPRNG,k,d);
+    logisticRegression = configureLogisticRegression(getPRNG,n,v,t,d,k);
     save configurations;
 end

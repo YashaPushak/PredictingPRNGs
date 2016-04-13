@@ -1,4 +1,4 @@
-function [learner] = configureRandomForests(getPRNG,k,d,seed)
+function [learner] = configureRandomForests(getPRNG,n,v,t,d,k,seed)
 %Configures the Random Forests function for a given PRNG, k,d, and seed, which
 %uniquely define the training and validation databestErr = inf; 
 %Random Forests has thre configurable parameters, the format of the features we are
@@ -7,8 +7,11 @@ function [learner] = configureRandomForests(getPRNG,k,d,seed)
 %INPUT:
 %values for the number of trees, results in 50 configurations being tried.
 %getPRNG - The random number generator function, see below for usage
-%k - The number of labels outputed by the PRNG
+%n - number of training points
+%v - number of validation points
+%t - number of testing points
 %d - the random number seed to be used by the PRNG
+%k - The number of labels outputed by the PRNG
 
 %Random Forests always uses a label size of 1.
 labelSize = 1;

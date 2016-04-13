@@ -1,4 +1,4 @@
-function [learner] = configureNaiveBayes(getPRNG,k,d,seed)
+function [learner] = configureNaiveBayes(getPRNG,n,v,t,d,k,seed)
 %Configures the NaiveBayes function for a given PRNG, k,d, and seed, which
 %uniquely define the training and validation databestErr = inf; 
 %In this setting, Naive Bayes only has 1 parameter, which is the input
@@ -7,8 +7,11 @@ function [learner] = configureNaiveBayes(getPRNG,k,d,seed)
 %configuration process than the other generators. 
 %INPUT:
 %getPRNG - The random number generator function, see below for usage
-%k - The number of labels outputed by the PRNG
+%n - number of training points
+%v - number of validation points
+%t - number of testing points
 %d - the random number seed to be used by the PRNG
+%k - The number of labels outputed by the PRNG
 
 %Naive Bayes always uses a label size of 1.
 labelSize = 1;
