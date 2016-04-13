@@ -23,6 +23,16 @@ for featureType = ['s','c']
     s = rng;
     [X,y,Xval,yval,~,~] = getPRNG(n,v,t,d,k,featureType,labelSize,seed);
     rng(s);
+    
+    %reformat features to be binary
+    if (featureType =='s')
+        X =reformatBayes(X,n,d,k);
+        Xval = reformatBayes(Xval,n,d,k);
+    elseif (featureType =='c')
+        X=reformatBayes(X,n,k,d);
+        Xval = reformatBayes(Xval,n,k,d);
+    end
+    
     %Train on X test, validate on Xval
     model = naiveBayes(X,y);
     yhat = model.predict(model,Xval);

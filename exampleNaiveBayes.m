@@ -18,11 +18,10 @@ for i = 1
     if (featureType =='s')
         X =reformatBayes(X,n,d,k);
         Xtest = reformatBayes(Xtest,n,d,k);
-    else
-        if (featureType =='c')
-            X=reformatBayes(X,n,k,d);
-            Xtest = reformatBayes(Xtest,n,k,d);
-        end
+    elseif (featureType =='c')
+        X=reformatBayes(X,n,k,d);
+        Xtest = reformatBayes(Xtest,n,k,d);
+        
     end
     
     model = naiveBayes(X,y);
@@ -32,7 +31,7 @@ for i = 1
     disp(['iteration: ' num2str(i) ]);
     fprintf('Average Error for Naive Bayes: %.04f \n', mean(err));
     fprintf('Median Error for Naive Bayes: %.04f \n', median(err));
-
+    
     if(mod(i,100) == 0)
         cdfplot(err);
         pause(0.1);
