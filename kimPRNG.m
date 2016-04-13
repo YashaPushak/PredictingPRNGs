@@ -14,6 +14,7 @@ end
 
 [numsTrain, numsTest] = loadPRNG('kim',n,d,t,k);
 
+
 [X,y] = reformat(numsTrain,n,d,k, featureType, labelSize);
 [Xtest,Ytest] = reformat(numsTest,t,d,k, featureType, labelSize);
 

@@ -30,10 +30,10 @@ while funEvals < maxEvals
     
     % Print out how we are doing
     optCond = norm(g,'inf');
-    fprintf('%6d %15.5e %15.5e %15.5e\n',funEvals,alpha,f,optCond);
+   % fprintf('%6d %15.5e %15.5e %15.5e\n',funEvals,alpha,f,optCond);
     
     if optCond < 0.1
-        fprintf('Solution found with optCond < 0.1\n');
+     %   fprintf('Solution found with optCond < 0.1\n');
         break;
     end
 end
