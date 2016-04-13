@@ -51,8 +51,8 @@ if(length(nums) >= numsSize)
     nums = temp;
     
     numsTrain = nums(1:n+d);
-    numsVal = nums(n+d+1:n+v+2*d+1);
-    numsTest = nums(n+v+2*d +2:end);
+    numsVal = nums(n+d+1:n+v+2*d);
+    numsTest = nums(n+v+2*d +1:end);
     
 elseif(length(nums) < numsSize)
     error('Not enough numbers to make train, val, and test set');

@@ -3,15 +3,20 @@ clear
 for i = 1
     
     n = 1000;
-    d = 124;
-    t = 8000;
+    v = 1000;
+    t = 1000;
+    d = 12;
     k = 5;
+    featureType = 's';
+    labelType = k;
     
-
+    
+    PRNGtype = 'yasha';
     % [X,y,Xtest,ytest] = rotatingPRNG(n,d,t,k,0.1);
     % [X,y,Xtest,ytest] = matlabTwisterPRNG(n,d,t,k,'s');
     %[X,y,Xtest,ytest] = yashaPRNG(n,d,t,k,'c');
-    [X,y,Xtest,ytest] = lcgPRNG(n,d,t,k,'s');
+    %[X,y,Xtest,ytest] = lcgPRNG(n,d,t,k,'s');
+    [X,y,Xval, Yval, Xtest,Ytest] = PRNGs(PRNGtype, n, v, t, d, k, featureType, labelSize, seed)
 
     
     model = KNN(X,y,101);
