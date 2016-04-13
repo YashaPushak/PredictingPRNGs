@@ -1,8 +1,6 @@
 function [numsT] = lcgPRNG(n,k, seed)
 %A basic linear congruential generator
 %n - number of inputs
-%d - Number of preceeding values used for predictions
-%t - Number of test values
 %k - Number of classes NOTE: Can only take values 2, 3, or 5 for this PRNG
 
 %Parameters of the linear congruiential generator
@@ -23,7 +21,7 @@ numsT = zeros(n,1);
 nums(1) = randi(2^31-1);
 numsT(1) = mod(nums(1),k)+1;
 
-%make the training set
+
 nums = zeros(n+d,1);
 for i = 2:(n+d)
     nums(i) = mod(a*nums(i-1) + c,m);
